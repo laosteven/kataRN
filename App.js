@@ -8,19 +8,17 @@ import reducers from './reducers';
 import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import NavigatorService from './utils/navigator';
-import {
-  RkTheme
-} from 'react-native-ui-kitten';
+import { RkTheme } from 'react-native-ui-kitten';
 import { bootstrap } from './style/themeBootstrapper'
 import { AppLoading, Font } from 'expo';
 
-import Welcome_Screen from './screens/Welcome_Screen';
-import Profile_Screen from './screens/Profile_Screen';
-import Login_Screen from './screens/Login_Screen';
-import Register_Screen from './screens/Register_Screen';
-import Reset_Screen from './screens/Reset_Screen';
-import Menu_Screen from './screens/Menu_Screen';
-import QrScan_Screen from './screens/QrScan_Screen';
+import Welcome_Screen from "./screens/Welcome_Screen";
+import Profile_Screen from "./screens/Profile_Screen";
+import Login_Screen from "./screens/Login_Screen";
+import Register_Screen from "./screens/Register_Screen";
+import Reset_Screen from "./screens/Reset_Screen";
+import Menu_Screen from "./screens/Menu_Screen";
+import QrScan_Screen from "./screens/QrScan_Screen";
 
 bootstrap();
 
@@ -29,7 +27,7 @@ export default class App extends React.Component {
     super(props);
     this.store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
   }
-
+  
   state = {
     loaded: false,
   };
@@ -59,7 +57,7 @@ export default class App extends React.Component {
   };
 
   render() {
-
+    
     if (!this.state.loaded) {
       return <AppLoading />;
     }
@@ -73,6 +71,18 @@ export default class App extends React.Component {
       main_screen: { screen: Menu_Screen },
       qr_scan: { screen: QrScan_Screen },
     });
+    
+    const LoginNavigator = StackNavigator(
+      {
+        welcome_screen: { screen: Welcome_Screen },
+        register_screen: { screen: Register_Screen },
+        reset_screen: { screen: Reset_Screen },
+        profile_screen: { screen: Profile_Screen },
+        login_screen: { screen: Login_Screen },
+        main_screen: { screen: MainNavigator },
+        qr_scan: { screen: QrScan_Screen }
+      }
+    );
 
     return (
       <Provider store={this.store}>
@@ -81,9 +91,11 @@ export default class App extends React.Component {
           <LoginNavigator
             ref={navigatorRef => {
               NavigatorService.setContainer(navigatorRef);
-            }} />
+            }}
+          />
         </View>
       </Provider>
     );
   }
 }
+

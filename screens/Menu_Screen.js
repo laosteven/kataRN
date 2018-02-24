@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Image,
   Text,
@@ -33,16 +33,15 @@ class Menu_Screen extends Component {
       <View style={styles.container}>
         <Button title="QR" onPress={() => NavigatorService.navigate('qr_scan')} />
       </View>
-    )
+    );
   }
 }
-
 
 let styles = RkStyleSheet.create(theme => ({
   container: {
     backgroundColor: theme.colors.screen.scroll,
-    justifyContent: 'center'
-  },
+    justifyContent: "center"
+  }
 }));
 
 export default Menu_Screen;
