@@ -23,6 +23,10 @@ class Menu_Screen extends Component {
           Guess who has 2 thumbs and is logged in.... YOU :D
         </RkText> */}
         <Button title="QR" onPress={() => NavigatorService.reset("qr_scan")} />
+        <Button
+          title="Map"
+          onPress={() => NavigatorService.reset("map_screen")}
+        />
       </View>
     );
   }
