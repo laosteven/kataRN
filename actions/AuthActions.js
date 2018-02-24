@@ -202,11 +202,11 @@ export const signupUser = ({ email, password, phone, firstname, lastname }) => {
 export const authStateChanged = () => {
   return (dispatch) => {
     firebase.auth().onAuthStateChanged((user) => {
+      //console.log(user, "USER");
       if (user) {
-        console.log('Authactions: Line 260: Dispatched loggedin');
         dispatch({
           type: LOGIN_STATUS_CHANGED,
-          payload: 'loggedin'
+          payload: { loggedin: 'loggedin', user: { name: user.displayName, email: user.email, phone: user.phoneNumber } }
         });
         currentNavState = NavigatorService.getCurrentRoute();
         if (currentNavState.routeName != 'main_screen') {

@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   Platform,
-  StatusBar,
   Button
 } from 'react-native';
 import {
@@ -30,6 +29,7 @@ class Menu_Screen extends Component {
           Guess who has 2 thumbs and is logged in.... YOU :D
         </RkText> */}
         <Button title="QR" onPress={() => NavigatorService.reset('qr_scan')} />
+        <Button title="Settings" onPress={() => NavigatorService.reset('settings_screen')} />
       </View>
     )
   }

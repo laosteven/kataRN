@@ -19,6 +19,7 @@ import Register_Screen from './screens/Register_Screen';
 import Reset_Screen from './screens/Reset_Screen';
 import Menu_Screen from './screens/Menu_Screen';
 import QrScan_Screen from './screens/QrScan_Screen';
+import Settings_Screen from './screens/Settings_Screen';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -82,7 +83,8 @@ export default class App extends React.Component {
       profile_screen: { screen: Profile_Screen },
       login_screen: { screen: Login_Screen },
       main_screen: { screen: MainNavigator },
-      qr_scan: { screen: QrScan_Screen }
+      qr_scan: { screen: QrScan_Screen },
+      settings_screen: { screen: Settings_Screen }
     },
       {
         navigationOptions: {
