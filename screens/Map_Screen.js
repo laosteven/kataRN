@@ -11,7 +11,7 @@ import {
 import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
 import { Header } from "react-navigation";
 import NavigatorService from "./../utils/navigator";
-import { MapView, Constants, Location, Permissions } from "expo";
+import { MapView, Circle, Constants, Location, Permissions } from "expo";
 
 class Map_Screen extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Map_Screen extends Component {
       latitude: 44.363518,
       longitude: -76.360238,
       latitudeDelta: 13,
-      longitudeDelta: 14
+      longitudeDelta: 15
     },
     markers: [
       {
@@ -109,6 +109,14 @@ class Map_Screen extends Component {
             title={marker.title}
           />
         ))}
+        <MapView.Marker
+          coordinate={{
+            latitude: 43.645268,
+            longitude: -79.380537
+          }}
+          title="You"
+          pinColor="#0000FF"
+        />
       </MapView>
     );
   }
