@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Platform,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native';
 import {
   RkText,
@@ -14,6 +15,7 @@ import {
   RkTheme
 } from 'react-native-ui-kitten';
 import { Header } from 'react-navigation';
+import NavigatorService from './../utils/navigator';
 
 class Menu_Screen extends Component {
 
@@ -24,9 +26,10 @@ class Menu_Screen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>
+        {/* <RkText>
           Guess who has 2 thumbs and is logged in.... YOU :D
-        </Text>
+        </RkText> */}
+        <Button title="QR" onPress={() => NavigatorService.reset('qr_scan')} />
       </View>
     )
   }

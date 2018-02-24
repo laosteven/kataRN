@@ -18,6 +18,7 @@ import Login_Screen from './screens/Login_Screen';
 import Register_Screen from './screens/Register_Screen';
 import Reset_Screen from './screens/Reset_Screen';
 import Menu_Screen from './screens/Menu_Screen';
+import QrScan_Screen from './screens/QrScan_Screen';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class App extends React.Component {
 
     const MainNavigator = TabNavigator({
       menu_scr: { screen: Menu_Screen },
+      qr_scan: { screen: QrScan_Screen }
       // orders_screen: { screen: Orders_Screen },
       // settings_screen: { screen: Settings_Screen },
     },
@@ -79,7 +81,8 @@ export default class App extends React.Component {
       reset_screen: { screen: Reset_Screen },
       profile_screen: { screen: Profile_Screen },
       login_screen: { screen: Login_Screen },
-      main_screen: { screen: MainNavigator }
+      main_screen: { screen: MainNavigator },
+      qr_scan: { screen: QrScan_Screen }
     },
       {
         navigationOptions: {
