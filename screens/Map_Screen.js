@@ -13,14 +13,6 @@ import { Header } from "react-navigation";
 import NavigatorService from "./../utils/navigator";
 import { MapView, Constants, Location, Permissions } from "expo";
 
-const { width, height } = Dimensions.get("window");
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = 0.0421;
-
 class Map_Screen extends Component {
   constructor(props) {
     super(props);
@@ -28,77 +20,96 @@ class Map_Screen extends Component {
 
   state = {
     region: {
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
+      latitude: 44.363518,
+      longitude: -76.360238,
+      latitudeDelta: 13,
+      longitudeDelta: 14
     },
-    locationResult: null,
-    location: { coords: { latitude: 37.78825, longitude: -122.4324 } },
-    errorMessage: null
-  };
-
-  componentWillMount() {
-    if (Platform.OS === "android" && !Constants.isDevice) {
-      this.setState({
-        errorMessage:
-          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
-      });
-    }
-  }
-
-  componentDidMount() {
-    this._getLocationAsync();
-  }
-
-  _handleMapRegionChange = mapRegion => {
-    this.setState({ mapRegion });
-  };
-
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        locationResult: "Permission to access location was denied",
-        location
-      });
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ locationResult: JSON.stringify(location), location });
+    markers: [
+      {
+        title: "Windsor",
+        coordinates: {
+          latitude: 42.324966,
+          longitude: -83.007179
+        }
+      },
+      {
+        title: "London",
+        coordinates: {
+          latitude: 42.981506,
+          longitude: -81.247084
+        }
+      },
+      {
+        title: "Kitchener-Waterloo",
+        coordinates: {
+          latitude: 43.455635,
+          longitude: -80.493136
+        }
+      },
+      {
+        title: "Pearson Airport",
+        coordinates: {
+          latitude: 43.678123,
+          longitude: -79.624995
+        }
+      },
+      {
+        title: "Toronto Union",
+        coordinates: {
+          latitude: 43.645268,
+          longitude: -79.380537
+        }
+      },
+      {
+        title: "Toronto East Harbour Transit Hub",
+        coordinates: {
+          latitude: 43.656494,
+          longitude: -79.345338
+        }
+      },
+      {
+        title: "Kingston",
+        coordinates: {
+          latitude: 44.257619,
+          longitude: -76.536476
+        }
+      },
+      {
+        title: "Ottawa",
+        coordinates: {
+          latitude: 45.416327,
+          longitude: -75.651603
+        }
+      },
+      {
+        title: "Montreal",
+        coordinates: {
+          latitude: 45.499983,
+          longitude: -73.566643
+        }
+      },
+      {
+        title: "Quebec",
+        coordinates: {
+          latitude: 46.817582,
+          longitude: -71.214163
+        }
+      }
+    ]
   };
 
   render() {
-    let text = "Waiting..";
-    let lat = 37.78825;
-    let long = -122.4324;
-
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      lat = this.state.location.coords.latitude;
-      long = this.state.location.coords.longitude;
-    }
-
     return (
-      <View style={styles.container}>
-        <MapView
-          style={{
-            alignSelf: "stretch",
-            flex: 0.9
-          }}
-          region={this.mapRegion}
-          onRegionChange={this._handleMapRegionChange}
-        >
+      <MapView style={styles.map} initialRegion={this.state.region}>
+        {this.state.markers.map((marker, index) => (
           <MapView.Marker
-            coordinate={this.state.location.coords}
-            title="My Location"
-            description="You are here!"
+            key={index}
+            coordinate={marker.coordinates}
+            title={marker.title}
           />
-        </MapView>
-
-        <Text sytle={{ flex: 0.1 }}>Location: {this.state.locationResult}</Text>
-      </View>
+        ))}
+      </MapView>
     );
   }
 }
@@ -118,6 +129,13 @@ let styles = RkStyleSheet.create(theme => ({
     fontWeight: "bold",
     textAlign: "center",
     color: "#34495e"
+  },
+  map: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    position: "absolute"
   }
 }));
 
