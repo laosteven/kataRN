@@ -31,7 +31,11 @@ class Menu_Screen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="QR" onPress={() => NavigatorService.navigate('qr_scan')} />
+        {/* <RkText>
+          Guess who has 2 thumbs and is logged in.... YOU :D
+        </RkText> */}
+        <Button title="QR" onPress={() => NavigatorService.reset('qr_scan')} />
+        <Button title="Settings" onPress={() => NavigatorService.reset('settings_screen')} />
       </View>
     );
   }

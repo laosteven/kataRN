@@ -12,13 +12,14 @@ import { RkTheme } from 'react-native-ui-kitten';
 import { bootstrap } from './style/themeBootstrapper'
 import { AppLoading, Font } from 'expo';
 
-import Welcome_Screen from "./screens/Welcome_Screen";
-import Profile_Screen from "./screens/Profile_Screen";
-import Login_Screen from "./screens/Login_Screen";
-import Register_Screen from "./screens/Register_Screen";
-import Reset_Screen from "./screens/Reset_Screen";
-import Menu_Screen from "./screens/Menu_Screen";
-import QrScan_Screen from "./screens/QrScan_Screen";
+import Welcome_Screen from './screens/Welcome_Screen';
+import Profile_Screen from './screens/Profile_Screen';
+import Login_Screen from './screens/Login_Screen';
+import Register_Screen from './screens/Register_Screen';
+import Reset_Screen from './screens/Reset_Screen';
+import Menu_Screen from './screens/Menu_Screen';
+import QrScan_Screen from './screens/QrScan_Screen';
+import Settings_Screen from './screens/Settings_Screen';
 
 bootstrap();
 
@@ -27,7 +28,7 @@ export default class App extends React.Component {
     super(props);
     this.store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
   }
-  
+
   state = {
     loaded: false,
   };
@@ -57,21 +58,44 @@ export default class App extends React.Component {
   };
 
   render() {
-    
+
     if (!this.state.loaded) {
       return <AppLoading />;
     }
-
-    const LoginNavigator = StackNavigator({
-      welcome_screen: { screen: Welcome_Screen },
-      register_screen: { screen: Register_Screen },
-      reset_screen: { screen: Reset_Screen },
-      profile_screen: { screen: Profile_Screen },
-      login_screen: { screen: Login_Screen },
-      main_screen: { screen: Menu_Screen },
+    const MainNavigator = TabNavigator({
+      menu_scr: { screen: Menu_Screen },
       qr_scan: { screen: QrScan_Screen },
-    });
-    
+      settings_screen: { screen: Settings_Screen },
+    },
+      {
+        navigationOptions: {
+          headerLeft: null,
+          headerStyle: {
+            backgroundColor: 'white',
+            elevation: 2,
+            paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight + 10
+          },
+          headerTitleStyle: {
+            fontSize: RkTheme.current.fonts.sizes.h5,
+            alignSelf: 'center',
+            marginBottom: Platform.OS === 'ios' ? 0 : 10,
+            marginTop: Platform.OS === 'ios' ? 25 : 0
+          }
+        },
+        tabBarOptions: {
+          showLabel: false,
+          showIcon: true,
+          indicatorStyle: { backgroundColor: '#ffffff' },
+          activeTintColor: RkTheme.current.colors.accent,
+          inactiveTintColor: RkTheme.current.colors.text.hint,
+          style: { backgroundColor: '#ffffff' },
+        },
+        cardStyle: {
+          paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+        },
+        swipeEnabled: false,
+        tabBarPosition: 'bottom',
+      })
     const LoginNavigator = StackNavigator(
       {
         welcome_screen: { screen: Welcome_Screen },
@@ -80,7 +104,8 @@ export default class App extends React.Component {
         profile_screen: { screen: Profile_Screen },
         login_screen: { screen: Login_Screen },
         main_screen: { screen: MainNavigator },
-        qr_scan: { screen: QrScan_Screen }
+        qr_scan: { screen: QrScan_Screen },
+        settings_screen: { screen: Settings_Screen }
       }
     );
 
