@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 import { UtilStyles } from '../style/styles';
+import NavigatorService from './../utils/navigator';  
+import {  } from '../actions'; 
 
 export default class QrScan_Screen extends Component {
   static navigationOptions = {
     title: 'Station Scan'
   };
+
+  constructor(props) { 
+    super(props);  
+    this.scanSuccess = false; 
+  } 
 
   state = {
     hasCameraPermission: null,
@@ -36,8 +43,14 @@ export default class QrScan_Screen extends Component {
     }
   }
 
-  _handleBarCodeRead = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  _handleBarCodeRead = ({ type, data }) => {    
+    if(this.scanSuccess) return; 
+ 
+    var arr = data.split(",");  
+    let first = this.props.firstname; 
+    alert(`Welcome to ${arr[1]}, ${first}`); 
+    NavigatorService.reset("main_screen"); 
+    this.scanSuccess = true; 
   }
 
   _handlePress = () => {
@@ -55,3 +68,12 @@ const styles = StyleSheet.create({
     marginLeft: 16
   }
 });
+
+const mapStateToProps = ({ auth }) => { 
+  const { firstname } = auth; 
+  return { firstname }; 
+}; 
+ 
+// export default connect(mapStateToProps, { 
+//   emailResetChanged, resetUser, errorSet 
+// })(QrScan_Screen); 

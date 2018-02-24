@@ -62,40 +62,7 @@ export default class App extends React.Component {
     if (!this.state.loaded) {
       return <AppLoading />;
     }
-    const MainNavigator = TabNavigator({
-      menu_scr: { screen: Menu_Screen },
-      qr_scan: { screen: QrScan_Screen },
-      settings_screen: { screen: Settings_Screen },
-    },
-      {
-        navigationOptions: {
-          headerLeft: null,
-          headerStyle: {
-            backgroundColor: 'white',
-            elevation: 2,
-            paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight + 10
-          },
-          headerTitleStyle: {
-            fontSize: RkTheme.current.fonts.sizes.h5,
-            alignSelf: 'center',
-            marginBottom: Platform.OS === 'ios' ? 0 : 10,
-            marginTop: Platform.OS === 'ios' ? 25 : 0
-          }
-        },
-        tabBarOptions: {
-          showLabel: false,
-          showIcon: true,
-          indicatorStyle: { backgroundColor: '#ffffff' },
-          activeTintColor: RkTheme.current.colors.accent,
-          inactiveTintColor: RkTheme.current.colors.text.hint,
-          style: { backgroundColor: '#ffffff' },
-        },
-        cardStyle: {
-          paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
-        },
-        swipeEnabled: false,
-        tabBarPosition: 'bottom',
-      })
+
     const LoginNavigator = StackNavigator(
       {
         welcome_screen: { screen: Welcome_Screen },
@@ -103,7 +70,7 @@ export default class App extends React.Component {
         reset_screen: { screen: Reset_Screen },
         profile_screen: { screen: Profile_Screen },
         login_screen: { screen: Login_Screen },
-        main_screen: { screen: MainNavigator },
+        main_screen: { screen: Menu_Screen },
         qr_scan: { screen: QrScan_Screen },
         settings_screen: { screen: Settings_Screen }
       }
