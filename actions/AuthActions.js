@@ -202,7 +202,6 @@ export const signupUser = ({ email, password, phone, firstname, lastname }) => {
 export const authStateChanged = () => {
   return (dispatch) => {
     firebase.auth().onAuthStateChanged((user) => {
-      //console.log(user, "USER");
       if (user) {
         dispatch({
           type: LOGIN_STATUS_CHANGED,
@@ -243,5 +242,4 @@ const loginUserSuccess = (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-
 };

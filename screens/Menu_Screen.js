@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Image,
   Text,
   View,
   TouchableOpacity,
   Platform,
-  Button
+  StatusBar,
+  Button,
+  StyleSheet
 } from 'react-native';
 import {
   RkText,
@@ -15,8 +17,12 @@ import {
 } from 'react-native-ui-kitten';
 import { Header } from 'react-navigation';
 import NavigatorService from './../utils/navigator';
+import MapView from 'expo';
 
 class Menu_Screen extends Component {
+  static navigationOptions = {
+    title: 'Kata'
+  };
 
   constructor(props) {
     super(props);
@@ -31,16 +37,15 @@ class Menu_Screen extends Component {
         <Button title="QR" onPress={() => NavigatorService.reset('qr_scan')} />
         <Button title="Settings" onPress={() => NavigatorService.reset('settings_screen')} />
       </View>
-    )
+    );
   }
 }
-
 
 let styles = RkStyleSheet.create(theme => ({
   container: {
     backgroundColor: theme.colors.screen.scroll,
-    justifyContent: 'center'
-  },
+    justifyContent: "center"
+  }
 }));
 
 export default Menu_Screen;

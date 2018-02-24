@@ -1,8 +1,13 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
+import { UtilStyles } from '../style/styles';
 
-export default class QrScan_Screen extends React.Component {
+export default class QrScan_Screen extends Component {
+  static navigationOptions = {
+    title: 'Station Scan'
+  };
+
   state = {
     hasCameraPermission: null,
   }
@@ -34,4 +39,19 @@ export default class QrScan_Screen extends React.Component {
   _handleBarCodeRead = ({ type, data }) => {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   }
+
+  _handlePress = () => {
+    this.props.navigation.navigate("main_screen");
+  };
 }
+
+const styles = StyleSheet.create({
+  componentRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 25
+  },
+  caption: {
+    marginLeft: 16
+  }
+});

@@ -77,7 +77,9 @@ export default (state = INITIAL_STATE, action) => {
     case LOAD_WELCOME_CHANGED:
       return { ...state, loadWelcome: action.payload };
     case LOGIN_USER_SUCCESS:
-      return { ...state, ...RESET_STATE, user: action.payload, loginStatus: 'loggedin', email: '', password: '' };
+      const { name, email, phone } = action.payload.user
+      const arr = name.split("  ");
+      return { ...state, error: '', emailReset: '', user: action.payload, loginStatus: 'loggedin', email, phone, firstname: arr[0], lastname: arr[1], password: '' };
     case LOGIN_USER_FAIL:
       return { ...state, error: action.payload, password: '', loginStatus: 'loginfailed' };
     default:
