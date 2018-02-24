@@ -14,14 +14,12 @@ import {
   RkStyleSheet,
   RkButton
 } from 'react-native-ui-kitten';
+import Modal from "react-native-modal";
 
 import { logoutUser, userDetailsFetch } from '../actions';
 
 import LoadingSpinner from './../components/Loading/LoadingSpinner';
-
-
-
-// FontAwesome.cog
+import CardModal from './../components/CardModal';
 
 class Settings_Screen extends Component {
 
@@ -29,7 +27,7 @@ class Settings_Screen extends Component {
     super(props);
 
     this.state = {
-      firstname: "", lastname: "", email: "", phone: ""
+      firstname: "", lastname: "", email: "", phone: "", payment_modal: false
     }
   }
 
@@ -75,7 +73,13 @@ class Settings_Screen extends Component {
               rkType='right clear' />
           </View>
         </View>
-        {/* </RkAvoidKeyboard> */}
+        <RkButton
+          rkType='large'
+          style={styles.button}
+          onPress={() => this.setState({ payment_modal: true })}
+        >Update Payment Method
+        </RkButton>
+        <CardModal payment_modal={this.state.payment_modal} _closeModal={this._closeModal.bind(this)} />
         <RkButton
           rkType='large'
           style={styles.button}
@@ -84,6 +88,10 @@ class Settings_Screen extends Component {
         </RkButton>
       </ScrollView >
     );
+  }
+
+  _closeModal() {
+    this.setState({ payment_modal: false });
   }
 }
 
@@ -111,7 +119,15 @@ let styles = RkStyleSheet.create(theme => ({
   button: {
     marginHorizontal: 16,
     marginBottom: 32
-  }
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
 }));
 
 const mapStateToProps = (state) => {
