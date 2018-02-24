@@ -10,6 +10,8 @@ import { StackNavigator } from 'react-navigation';
 import NavigatorService from './utils/navigator';
 
 import Welcome_Screen from './screens/Welcome_Screen';
+import Profile_Screen from './screens/Profile_Screen';
+import Login_Screen from './screens/Login_Screen';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -69,8 +71,8 @@ export default class App extends React.Component {
       welcome_screen: { screen: Welcome_Screen },
       // register_screen: { screen: Register_Screen },
       // reset_screen: { screen: Reset_Screen },
-      //profile_screen: { screen: Profile_Screen },
-      // login_screen: { screen: Login_Screen},
+      profile_screen: { screen: Profile_Screen },
+      login_screen: { screen: Login_Screen },
       // main_screen: { screen: MainNavigator}
     },
       {

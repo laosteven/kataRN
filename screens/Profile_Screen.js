@@ -9,6 +9,27 @@ import {
   Platform
 } from 'react-native';
 
+import {
+  RkButton,
+  RkText,
+  RkTextInput,
+  RkAvoidKeyboard,
+  RkStyleSheet,
+  RkTheme
+} from 'react-native-ui-kitten';
+
+import { emailChanged, phoneChanged, firstnameChanged, lastnameChanged, errorSet } from '../actions';
+import EmailTextInput from './../components/Login/EmailTextInput';
+import FirstnameTextInput from './../components/Login/FirstnameTextInput';
+import LastnameTextInput from './../components/Login/LastnameTextInput';
+import PhoneTextInput from './../components/Login/PhoneTextInput';
+import ProfileDataButton from './../components/Login/ProfileDataButton';
+import FooterNavButtons from './../components/Login/FooterNavButtons';
+import LoginHeaderImage from './../components/Login/LoginHeaderImage';
+import NavigatorService from './../utils/navigator';
+import LoadingSpinner from './../components/Loading/LoadingSpinner';
+import ErrorMessage from './../components/ErrorMessage';
+
 class ProfileScreen extends Component {
 
   constructor(props) {
@@ -116,7 +137,7 @@ let styles = RkStyleSheet.create(theme => ({
   },
   image: {
     marginVertical: 10,
-    height: scaleVertical(77),
+    height: 77,
     resizeMode: 'contain'
   }
 }));
