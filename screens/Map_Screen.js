@@ -215,6 +215,10 @@ class Map_Screen extends Component {
     }
   };
 
+  componentDidMount() {
+    this.animate()
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -246,14 +250,14 @@ class Map_Screen extends Component {
             pinColor="#0000FF"
           />
         </MapView>
-        <View style={styles.buttonContainer}>
+        {/* <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={this.animate.bind(this)}
             style={[styles.bubble, styles.button]}
           >
             <Text>Travel</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     );
   }
