@@ -24,6 +24,7 @@ import QrScan_Screen_Deboard from './screens/QrScan_Screen_Deboard';
 import Settings_Screen from './screens/Settings_Screen';
 import Waiting_Room_Screen from './screens/Waiting_Room_Screen';
 import ThankYou_Screen from './screens/ThankYou_Screen';
+import Map_Screen from "./screens/Map_Screen";
 
 bootstrap();
 
@@ -70,7 +71,7 @@ export default class App extends React.Component {
       menu_scr: { screen: Menu_Screen, title: "Welcome" },
       board_scan: { screen: QrScan_Screen, title: "Board" },
       waiting_room: { screen: Waiting_Room_Screen, title: "Waiting Room" },
-      travel: { screen: Menu_Screen, title: "Travel" },
+      travel: { screen: Map_Screen, title: "Travel" },
       deboard_scan: { screen: QrScan_Screen_Deboard, title: "Deboard" },
       // settings_screen: { screen: Settings_Screen },
     },

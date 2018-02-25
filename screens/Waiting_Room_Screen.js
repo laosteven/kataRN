@@ -19,7 +19,7 @@ class Waiting_Room_Screen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { time: 30 };
+    this.state = { time: 10 };
   }
   tick() {
     if (this.state.time === 0) {
