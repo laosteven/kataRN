@@ -20,6 +20,7 @@ import {
   Permissions
 } from "expo";
 
+
 class Map_Screen extends Component {
   constructor(props) {
     super(props);
@@ -115,6 +116,9 @@ class Map_Screen extends Component {
     let long = -83.007179;
 
     this._setCurrentLocation(lat, long);
+
+    // comment this out
+    setTimeout(() => NavigatorService.navigate('deboard_scan'), 5000);
   }
 
   _setCurrentLocation = (x, y) => {

@@ -203,10 +203,9 @@ export const authStateChanged = () => {
   return (dispatch) => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('Authactions: Line 260: Dispatched loggedin');
         dispatch({
           type: LOGIN_STATUS_CHANGED,
-          payload: 'loggedin'
+          payload: { loggedin: 'loggedin', user: { name: user.displayName, email: user.email, phone: user.phoneNumber } }
         });
         currentNavState = NavigatorService.getCurrentRoute();
         if (currentNavState.routeName != 'main_screen') {
@@ -243,5 +242,4 @@ const loginUserSuccess = (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-
 };

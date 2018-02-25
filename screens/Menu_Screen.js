@@ -5,13 +5,26 @@ import {
   View,
   TouchableOpacity,
   Platform,
-  Button
-} from "react-native";
-import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
-import { Header } from "react-navigation";
-import NavigatorService from "./../utils/navigator";
+  StatusBar,
+  Button,
+  StyleSheet
+} from 'react-native';
+import {
+  RkText,
+  RkCard,
+  RkStyleSheet,
+  RkTheme,
+  RkButton
+} from 'react-native-ui-kitten';
+import { Header } from 'react-navigation';
+import NavigatorService from './../utils/navigator';
+import MapView from 'expo';
 
 class Menu_Screen extends Component {
+  static navigationOptions = {
+    title: 'KTA'
+  };
+
   constructor(props) {
     super(props);
   }
@@ -19,15 +32,11 @@ class Menu_Screen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <RkText>
-          Guess who has 2 thumbs and is logged in.... YOU :D
-        </RkText> */}
-        <Button title="QR" onPress={() => NavigatorService.reset("qr_scan")} />
-        <Button
-          title="Map"
-          onPress={() => NavigatorService.reset("map_screen")}
-        />
-      </View>
+        <RkText>
+          Welcome to KTA when prompted at a Transpod gate press button bellow for QR scan
+        </RkText>
+        <RkButton onPress={() => NavigatorService.navigate('board_scan')} >Board</RkButton>
+      </View >
     );
   }
 }
