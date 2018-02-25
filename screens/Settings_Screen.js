@@ -74,7 +74,7 @@ class Settings_Screen extends Component {
           </View>
         </View>
         <RkButton
-          rkType='large'
+          rkType='xlarge rounded info'
           style={styles.button}
           onPress={() => this.setState({ payment_modal: true })}
         >Update Payment Method

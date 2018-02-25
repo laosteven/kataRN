@@ -48,20 +48,24 @@ class Menu_Screen extends React.Component {
       <View style={styles.screen}>
 
         {image}
-        
+
         <RkText style={styles.paragraph}>
-          Welcome to Kata! {"\n"}{"\n"}
+          Welcome to {"\n"}
+          <RkText rkType='bold' style={styles.emphasis}>
+            {" "}Kata!
+          </RkText>
+          {"\n"}{"\n"}
 
           When prompted at a Transpod gate: {"\n"}
           press the button below for a QR scan.
         </RkText>
 
         <RkButton
-          style={[{ width: 100, justifyContent: 'flex-start', paddingLeft: 15 }, UtilStyles.spaceVertical]}
+          style={[{ width: 110, justifyContent: 'flex-start' }, UtilStyles.spaceVertical]}
           onPress={() => this.props.navigation.navigate('board_scan')}
           rkType='large rounded info'>
-          <Icon style={[UtilStyles.icon, UtilStyles.iconRound]} name={'train'} size={24} />
-          <RkText rkType='caption'>Board</RkText>
+          <Icon style={[UtilStyles.icon, UtilStyles.iconRound, { marginHorizontal: 8, color: 'white' }]} name={'train'} size={24} />
+          <RkText rkType='bold caption'>Board</RkText>
         </RkButton>
 
       </View >
@@ -84,6 +88,9 @@ let styles = RkStyleSheet.create(theme => ({
     fontWeight: "bold",
     textAlign: "center",
     color: "#34495e"
+  },
+  emphasis: {
+    fontSize: 26
   },
   screen: {
     backgroundColor: theme.colors.screen.base,
