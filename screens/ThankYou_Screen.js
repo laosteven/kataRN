@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { UtilStyles } from '../style/styles';
 import { scaleModerate } from '../utils/scale';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { pay } from '../actions'
 
 class ThankYou_Screen extends Component {
 
@@ -28,7 +29,7 @@ class ThankYou_Screen extends Component {
   }
 
   componentDidMount() {
-    //this.props.authStateChanged(); PAY
+    this.props.pay(this.cost(), this.props.startNum, this.props.stopNum)
   }
 
   cost() {
@@ -88,8 +89,8 @@ class ThankYou_Screen extends Component {
   }
 }
 
-const mapStateToProps = ({ qr }) => {
-  return { start_station: qr.onboard.stpName, stop_station: qr.deboard.stpName };
+const mapStateToProps = ({ qr, auth }) => {
+  return { start_station: qr.onboard.stpName, stop_station: qr.deboard.stpName, startNum: qr.onboard.stpNum, stopNum: qr.deboard.stpNum };
 };
 
 let styles = RkStyleSheet.create(theme => ({
@@ -119,4 +120,4 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default connect(mapStateToProps, null)(ThankYou_Screen);
+export default connect(mapStateToProps, { pay })(ThankYou_Screen);
