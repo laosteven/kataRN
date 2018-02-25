@@ -33,7 +33,11 @@ class ThankYou_Screen extends Component {
   }
 
   cost() {
-    return 50;
+    let start_num = this.props.startNum.replace(/\D+/g, '');
+    let stop_num = this.props.stopNum.replace(/\D+/g, '');
+    let max = Math.max(start_num, stop_num)
+    let min = Math.min(start_num, stop_num)
+    return (1 + max - min) * 10
   }
 
   render() {
@@ -45,34 +49,34 @@ class ThankYou_Screen extends Component {
     let width_sub = width - 40;
 
     let arrival = this.props.stop_station;
-    if(arrival === "Windsor") {
+    if (arrival === "Windsor") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/windsor.png')} />;
     }
-    else if(arrival === "London") {
+    else if (arrival === "London") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/london.png')} />;
     }
-    else if(arrival === "Kitchener-Waterloo") {
+    else if (arrival === "Kitchener-Waterloo") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kitchener-waterloo.png')} />;
     }
-    else if(arrival === "Pearson Airport") {
+    else if (arrival === "Pearson Airport") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/pearson-airport.png')} />;
     }
-    else if(arrival === "Toronto Union") {
+    else if (arrival === "Toronto Union") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-union.png')} />;
     }
-    else if(arrival === "Toronto East Harbour Transit Hub") {
+    else if (arrival === "Toronto East Harbour Transit Hub") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-east-harbour-transit-hub.png')} />;
     }
-    else if(arrival === "Kingston") {
+    else if (arrival === "Kingston") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kingston.png')} />;
     }
-    else if(arrival === "Ottawa") {
+    else if (arrival === "Ottawa") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/ottawa.png')} />;
     }
-    else if(arrival === "Montreal") {
+    else if (arrival === "Montreal") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/montreal.png')} />;
     }
-    else if(arrival === "Quebec") {
+    else if (arrival === "Quebec") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/quebec.png')} />;
     }
     else {
@@ -85,17 +89,17 @@ class ThankYou_Screen extends Component {
         {image}
 
         <RkText style={styles.paragraph}>
-          Dear valued customer, 
+          Dear valued customer,
           {"\n"}{"\n"}
-          Your trip from 
+          Your trip from
           {"\n"}
           <RkText rkType='bold' style={styles.boldness}>
-            {this.props.start_station} 
+            {this.props.start_station}
           </RkText>
           {"\n"}
           to
           {"\n"}
-            <RkText rkType='bold' style={styles.boldness}>
+          <RkText rkType='bold' style={styles.boldness}>
             {this.props.stop_station}
           </RkText>
           {"\n"}
