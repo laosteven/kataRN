@@ -8,7 +8,8 @@ import {
   Button,
   Dimensions,
   StyleSheet,
-  Easing
+  Easing,
+  ToastAndroid
 } from "react-native";
 import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
 import { Header } from "react-navigation";
@@ -197,6 +198,12 @@ class Map_Screen extends Component {
           markers: markersCopy
         });
       }
+
+      const stationName = this.state.markers[COUNT].title;
+      ToastAndroid.show(
+        "You have arrived at " + stationName,
+        ToastAndroid.SHORT
+      );
 
       COUNT++;
 
