@@ -7,12 +7,19 @@ import {
   RkButton,
   RkStyleSheet
 } from 'react-native-ui-kitten';
-export default class CardModal extends Component {
+import { updateCard } from '../actions';
+import { connect } from 'react-redux';
+
+
+class CardModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Number: "", Exp_Month: "", Exp_Day: "", CVC: ""
+      Number: '4242424242424242',
+      Exp_Month: '02',
+      Exp_Day: '21',
+      CVC: '999',
     }
   }
   render() {
@@ -49,17 +56,14 @@ export default class CardModal extends Component {
               />
             </View>
           </View>
-          {/* number: '4242424242424242',
-    exp_month: '02',
-    exp_year: '21',
-    cvc: '999',
-    name: 'Billy Joe' 
-    email*/}
           <View style={{
             flexDirection: 'row',
           }}>
             <RkButton
-              onPress={() => { this.props._closeModal() }}
+              onPress={() => {
+                this.props.updateCard(this.state);
+                this.props._closeModal()
+              }}
               rkType='medium'
             >Update</RkButton>
             <RkButton
@@ -107,3 +111,10 @@ let styles = RkStyleSheet.create(theme => ({
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
 }));
+
+const mapStateToProps = ({ settings }) => {
+  const { card } = settings;
+  return { card };
+};
+
+export default connect(mapStateToProps, { updateCard })(CardModal);

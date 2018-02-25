@@ -6,6 +6,7 @@ import NavigatorService from './../utils/navigator';
 import { RkStyleSheet, RkButton, RkText } from 'react-native-ui-kitten';
 import { loginStatusChanged, authStateChanged } from '../actions';
 import { connect } from 'react-redux';
+import { pay } from '../actions'
 
 class ThankYou_Screen extends Component {
 
@@ -19,7 +20,7 @@ class ThankYou_Screen extends Component {
   }
 
   componentDidMount() {
-    //this.props.authStateChanged(); PAY
+    this.props.pay(this.cost(), this.props.startNum, this.props.stopNum)
   }
   cost() {
     return 50;
@@ -40,8 +41,8 @@ class ThankYou_Screen extends Component {
   }
 }
 
-const mapStateToProps = ({ qr }) => {
-  return { start_station: qr.onboard.stpName, stop_station: qr.deboard.stpName };
+const mapStateToProps = ({ qr, auth }) => {
+  return { start_station: qr.onboard.stpName, stop_station: qr.deboard.stpName, startNum: qr.onboard.stpNum, stopNum: qr.deboard.stpNum };
 };
 
 let styles = RkStyleSheet.create(theme => ({
@@ -58,4 +59,4 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default connect(mapStateToProps, null)(ThankYou_Screen);
+export default connect(mapStateToProps, { pay })(ThankYou_Screen);
