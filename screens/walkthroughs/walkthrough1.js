@@ -38,7 +38,7 @@ export class Walkthrough1 extends React.Component {
       <View style={styles.screen}>
         {image}
         {image_quality}
-        <RkText rkType='header2' style={styles.text}>Our shop delivers fast</RkText>
+        <RkText rkType='header2' style={styles.text}>Fast ticketing system</RkText>
       </View>
     )
   }

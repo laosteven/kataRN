@@ -61,7 +61,7 @@ class PhoneTextInput extends Component {
       <View style = {styles.emailPwdContainer} >
         <RkTextInput
           rkType='rounded'
-          placeholder='Phone ( 8143217654 )'
+          placeholder='Phone'
           value={this.props.phone}
           onChangeText={phone => this.onPhoneChange(phone)}
           onBlur={() => { this.validateInput('phone', this.props.phone); }}

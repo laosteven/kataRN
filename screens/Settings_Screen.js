@@ -77,7 +77,7 @@ class Settings_Screen extends Component {
         </View>
         {/* </RkAvoidKeyboard> */}
         <RkButton
-          rkType='large'
+          rkType='xlarge rounded'
           style={styles.button}
           onPress={() => this.props.logoutUser()}
         >Sign Out

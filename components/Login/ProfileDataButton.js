@@ -49,14 +49,14 @@ class ProfileDataButton extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <RkButton
           onPress={() => {
             this.onButtonPress();
           }}
-          rkType='large'
+          rkType='xlarge rounded'
           style={styles.save}>
-          Proceed to Register
+            Register
           </RkButton>
       </View>
     );

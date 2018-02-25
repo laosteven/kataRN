@@ -61,7 +61,7 @@ class EmailTextInput extends Component {
       <View style = {styles.emailPwdContainer}>
         <RkTextInput
           rkType='rounded'
-          placeholder='Email ( John.Doe@gmail.com )'
+          placeholder='Email'
           value={this.props.emailReset}
           onChangeText={emailReset => this.onEmailResetChange(emailReset)}
           onBlur={() => { this.validateInput('email', this.props.emailReset); }}
