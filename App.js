@@ -81,6 +81,7 @@ export default class App extends React.Component {
               onPress={() => NavigatorService.navigate('settings_screen')}
             />
           ),
+          tabBarOnPress: (scene, jumpToIndex) => { return }
 
         }),
         //   headerLeft: null,
@@ -108,7 +109,8 @@ export default class App extends React.Component {
         //   paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
         // },
         // swipeEnabled: false,
-        tabBarPosition: 'bottom'
+        tabBarPosition: 'bottom',
+
       })
     const LoginNavigator = StackNavigator(
       {
