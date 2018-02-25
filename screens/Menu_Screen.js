@@ -13,16 +13,18 @@ import {
   RkText,
   RkCard,
   RkStyleSheet,
-  RkTheme,
-  RkButton
+  RkButton,
+  RkTheme
 } from 'react-native-ui-kitten';
 import { Header } from 'react-navigation';
 import NavigatorService from './../utils/navigator';
 import MapView from 'expo';
 import { connect } from 'react-redux';
 import CardModal from '../components/CardModal'
+import { Components, Constants } from 'expo';
+import { UtilStyles } from '../style/styles';
 
-class Menu_Screen extends Component {
+class Menu_Screen extends React.Component {
   static navigationOptions = {
     title: 'KTA'
   };
@@ -63,7 +65,19 @@ class Menu_Screen extends Component {
 let styles = RkStyleSheet.create(theme => ({
   container: {
     backgroundColor: theme.colors.screen.scroll,
-    justifyContent: "center"
+    justifyContent: "center",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#ecf0f1"
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#34495e"
   }
 }));
 
