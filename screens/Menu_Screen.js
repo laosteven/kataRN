@@ -60,7 +60,7 @@ class Menu_Screen extends React.Component {
           style={[{ width: 100, justifyContent: 'flex-start', paddingLeft: 15 }, UtilStyles.spaceVertical]}
           onPress={() => this.props.navigation.navigate('board_scan')}
           rkType='large rounded info'>
-          <Icon style={[UtilStyles.icon, UtilStyles.iconRound, marginHorizontal: 16]} name={'train'} size={24} />
+          <Icon style={[UtilStyles.icon, UtilStyles.iconRound]} name={'train'} size={24} />
           <RkText rkType='caption'>Board</RkText>
         </RkButton>
 
