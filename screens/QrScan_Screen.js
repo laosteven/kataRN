@@ -3,12 +3,18 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux'
 import { BarCodeScanner, Permissions } from 'expo';
 import { UtilStyles } from '../style/styles';
-import { onBoard } from '../actions';
+import NavigatorService from './../utils/navigator';  
+import {  } from '../actions'; 
 
 class QrScan_Screen extends Component {
   static navigationOptions = {
     title: 'Boarding'
   };
+
+  constructor(props) { 
+    super(props);  
+    this.scanSuccess = false; 
+  } 
 
   state = {
     hasCameraPermission: null,
@@ -38,7 +44,9 @@ class QrScan_Screen extends Component {
     }
   }
 
-  _handleBarCodeRead = ({ type, data }) => {
+  _handleBarCodeRead = ({ type, data }) => {    
+    if(this.scanSuccess) return; 
+    this.scanSuccess = true; 
     this.props.onBoard(data)
   }
 }

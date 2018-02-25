@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import {
   View
 } from 'react-native';
-import NavigatorService from './../utils/navigator';
-import { RkStyleSheet, RkButton } from 'react-native-ui-kitten';
-import { loginStatusChanged, authStateChanged } from '../actions';
 import { connect } from 'react-redux';
+
+import { RkStyleSheet, RkButton } from 'react-native-ui-kitten';
+import { Walkthrough } from './../components/walkthrough';
+import { Walkthrough1 } from './walkthroughs/walkthrough1';
+import { Walkthrough2 } from './walkthroughs/walkthrough2';
+import { Walkthrough3 } from './walkthroughs/walkthrough3';
+import { PaginationIndicator } from './../components';
+import { loginStatusChanged, authStateChanged, fontLoadedChanged } from '../actions';
+import AppSpinner from './../components/Loading/AppSpinner';
+import NavigatorService from './../utils/navigator';
+import ErrorMessage from './../components/ErrorMessage';
+import {UtilStyles} from '../style/styles';
 
 class Welcome_Screen extends Component {
 
@@ -29,12 +38,14 @@ class Welcome_Screen extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        <RkButton
-          rkType='large'
-          style={styles.button}
-          onPress={() => {
-            NavigatorService.reset('profile_screen');
-          }}>GET STARTED</RkButton>
+        <ErrorMessage />
+        <Walkthrough onChanged={(index) => this.changeIndex(index)}>
+          <Walkthrough1 />
+          <Walkthrough2 />
+          <Walkthrough3 />
+        </Walkthrough>
+        <PaginationIndicator length={3} current={this.state.index} />
+          <RkButton rkType='large outline' onPress={() => { NavigatorService.reset('profile_screen'); }} style={UtilStyles.spaceVertical}>GET STARTED</RkButton>
       </View>
     )
   }

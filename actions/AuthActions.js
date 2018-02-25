@@ -243,3 +243,17 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   });
 };
+
+// const getOn = (dispactch, stop_id, stop_name, stop_desc, stop_lat, stop_lon, location_type) => { 
+//   dispatch({ 
+//     type: LOGIN_STATUS_CHANGED, 
+//     payload: user 
+//   }); 
+// }; 
+ 
+// const getOff = (dispactch, stop_id, stop_name, stop_desc, stop_lat, stop_lon, location_type) => { 
+//   dispatch({ 
+//     type: LOGIN_STATUS_CHANGED, 
+//     payload: user 
+//   }); 
+// }; 

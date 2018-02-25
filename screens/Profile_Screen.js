@@ -108,12 +108,11 @@ class ProfileScreen extends Component {
           <FooterNavButtons
             emailPwdBtnStr={'Profile Screen'}
             onForgotPassword={''}
-            onNavString1={'Already have an account?'}
+            onNavString1={'Already have an account? '}
             onNavString2={'Sign In now'}
             onNavPress={
               () => {
                 NavigatorService.reset('login_screen');
-                //this.props.navigation.navigate('login_screen');
               }
             }
             keyboardflag={this.state.keyboardflag}

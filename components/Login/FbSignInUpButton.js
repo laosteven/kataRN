@@ -29,7 +29,7 @@ class FbSignInUpButton extends Component {
 
         <RkButton
           onPress={() => { this._pressSignInUp(); }}
-          rkType='large'
+          rkType='large rounded'
           style={styles.fb}
         >
           {this.props.fbBtnStr}

@@ -81,7 +81,7 @@ class Settings_Screen extends Component {
         </RkButton>
         <CardModal payment_modal={this.state.payment_modal} _closeModal={this._closeModal.bind(this)} />
         <RkButton
-          rkType='large'
+          rkType='xlarge rounded'
           style={styles.button}
           onPress={() => this.props.logoutUser()}
         >Sign Out
