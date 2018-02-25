@@ -38,13 +38,46 @@ class ThankYou_Screen extends Component {
 
   render() {
 
-    let contentHeight = scaleModerate(375, 1);
+    let contentHeight = scaleModerate(400, 1);
     let height = Dimensions.get('window').height - contentHeight;
     let width = Dimensions.get('window').width;
     let height_sub = height / 2;
     let width_sub = width - 40;
 
-    image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+    let arrival = this.props.stop_station;
+    if(arrival === "Windsor") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/windsor.png')} />;
+    }
+    else if(arrival === "London") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/london.png')} />;
+    }
+    else if(arrival === "Kitchener-Waterloo") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kitchener-waterloo.png')} />;
+    }
+    else if(arrival === "Pearson Airport") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/pearson-airport.png')} />;
+    }
+    else if(arrival === "Toronto Union") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-union.png')} />;
+    }
+    else if(arrival === "Toronto East Harbour Transit Hub") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-east-harbour-transit-hub.png')} />;
+    }
+    else if(arrival === "Kingston") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kingston.png')} />;
+    }
+    else if(arrival === "Ottawa") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/ottawa.png')} />;
+    }
+    else if(arrival === "Montreal") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/montreal.png')} />;
+    }
+    else if(arrival === "Quebec") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/quebec.png')} />;
+    }
+    else {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+    }
 
     return (
       <View style={styles.screen}>

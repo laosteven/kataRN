@@ -60,16 +60,19 @@ class CardModal extends Component {
             flexDirection: 'row',
           }}>
             <RkButton
+              onPress={() => { this.props._closeModal() }}
+              rkType='medium danger'>
+              Close
+            </RkButton>
+            
+            <RkButton
               onPress={() => {
                 this.props.updateCard(this.state);
                 this.props._closeModal()
               }}
-              rkType='medium'
-            >Update</RkButton>
-            <RkButton
-              onPress={() => { this.props._closeModal() }}
-              rkType='medium'
-            >Close</RkButton>
+              rkType='medium success'>
+              Update
+            </RkButton>
           </View>
         </View>
       </Modal>
