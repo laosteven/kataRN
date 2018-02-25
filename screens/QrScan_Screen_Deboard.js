@@ -4,15 +4,28 @@ import { BarCodeScanner, Permissions } from 'expo';
 import { UtilStyles } from '../style/styles';
 import { connect } from 'react-redux'
 import { deBoard } from '../actions';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+export const CustomNavButton = () => {
+  return (
+    <View>
+      <TouchableOpacity onPress={() => NavigatorService.navigate("travel")}>
+        <Icon style={[UtilStyles.icon, {fontSize: 20, marginLeft: 10}]} name='chevron-left'/>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 class QrScan_Screen_Deboard extends Component {
   static navigationOptions = {
-    title: 'Unboarding'
+    title: 'Unboarding',
+    headerLeft: CustomNavButton()
   };
 
   state = {
     hasCameraPermission: null,
   }
+
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);

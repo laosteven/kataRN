@@ -29,9 +29,10 @@ class Waiting_Room_Screen extends Component {
     super(props);
     this.state = { time: 10 };
   }
+
   tick() {
     if (this.state.time === 0) {
-      NavigatorService.navigate('travel')
+      this.props.navigation.navigate('travel')
     }
     this.setState(prevState => ({
       time: prevState.time - 1
@@ -48,13 +49,46 @@ class Waiting_Room_Screen extends Component {
 
   render() {
 
-    let contentHeight = scaleModerate(375, 1);
+    let contentHeight = scaleModerate(400, 1);
     let height = Dimensions.get('window').height - contentHeight;
     let width = Dimensions.get('window').width;
     let height_sub = height / 2;
     let width_sub = width - 40;
 
-    image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+    let departure = this.props.station;
+    if (departure === "Windsor") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/windsor.png')} />;
+    }
+    else if (departure === "London") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/london.png')} />;
+    }
+    else if (departure === "Kitchener-Waterloo") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kitchener-waterloo.png')} />;
+    }
+    else if (departure === "Pearson Airport") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/pearson-airport.png')} />;
+    }
+    else if (departure === "Toronto Union") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-union.png')} />;
+    }
+    else if (departure === "Toronto East Harbour Transit Hub") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-east-harbour-transit-hub.png')} />;
+    }
+    else if (departure === "Kingston") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kingston.png')} />;
+    }
+    else if (departure === "Ottawa") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/ottawa.png')} />;
+    }
+    else if (departure === "Montreal") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/montreal.png')} />;
+    }
+    else if (departure === "Quebec") {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/quebec.png')} />;
+    }
+    else {
+      image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+    }
 
     let str = " minute"
     str = this.state.time < 2 ? str.concat(".") : str.concat("s.")
@@ -65,12 +99,12 @@ class Waiting_Room_Screen extends Component {
         {image}
 
         <RkText style={styles.paragraph}>
-          Welcome to the 
+          Welcome to the
           {"\n"}
           <RkText rkType='bold' style={styles.emphasis}>
             {this.props.station}
           </RkText>
-          {"\n"} 
+          {"\n"}
           station!
         </RkText>
 
@@ -90,7 +124,6 @@ class Waiting_Room_Screen extends Component {
 
 const mapStateToProps = ({ qr }) => {
   const { stpName } = qr.onboard;
-
   return { station: stpName };
 };
 
