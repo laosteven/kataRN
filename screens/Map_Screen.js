@@ -19,6 +19,10 @@ import { MapView, Circle, Constants, Location, Permissions } from "expo";
 const COUNT = 1;
 
 class Map_Screen extends Component {
+  static navigationOptions = {
+    title: 'Travel'
+  };
+
   constructor(props) {
     super(props);
 

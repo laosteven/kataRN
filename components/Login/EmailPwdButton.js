@@ -66,7 +66,7 @@ class EmailPwdButton extends Component {
           onPress={() => {
             this.onButtonPress();
           }}
-          rkType='large'
+          rkType='xlarge rounded'
           style={styles.save}
         >
           {this.props.emailPwdBtnStr}

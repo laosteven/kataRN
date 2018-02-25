@@ -1,24 +1,19 @@
-import Expo from "expo";
-import React from "react";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import firebase from "firebase";
-import ReduxThunk from "redux-thunk";
-import reducers from "./reducers";
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  Platform,
-  Button
-} from "react-native";
-import { StackNavigator, TabNavigator } from "react-navigation";
-import NavigatorService from "./utils/navigator";
-import { RkTheme } from "react-native-ui-kitten";
-import { bootstrap } from "./style/themeBootstrapper";
-import { AppLoading, Font } from "expo";
-import { MaterialIcons } from "@expo/vector-icons";
+
+import Expo from 'expo';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
+import reducers from './reducers';
+import { StyleSheet, Text, View, StatusBar, Platform, Button, TouchableOpacity } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import NavigatorService from './utils/navigator';
+import { RkTheme, RkButton, RkStyleSheet } from 'react-native-ui-kitten';
+import { bootstrap } from './style/themeBootstrapper';
+import { UtilStyles } from './style/styles'; 
+import { AppLoading, Font } from 'expo';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Welcome_Screen from "./screens/Welcome_Screen";
 import Profile_Screen from "./screens/Profile_Screen";
@@ -73,54 +68,71 @@ export default class App extends React.Component {
     if (!this.state.loaded) {
       return <AppLoading />;
     }
-    const MainNavigator = TabNavigator(
-      {
-        // menu_scr: { screen: Menu_Screen, title: "Welcome" },
-        // board_scan: { screen: QrScan_Screen, title: "Board" },
-        // waiting_room: { screen: Waiting_Room_Screen, title: "Waiting Room" },
-        travel: { screen: Map_Screen, title: "Travel" },
-        deboard_scan: { screen: QrScan_Screen_Deboard, title: "Deboard" }
-        // settings_screen: { screen: Settings_Screen },
+    
+    const MainNavigator = TabNavigator({
+      menu_scr: { 
+        screen: Menu_Screen, 
+        title: "Kata",
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => <Icon name={'train'} size={20} color={tintColor} />
+        }
       },
+      board_scan: { 
+        screen: QrScan_Screen, 
+        title: "Board",
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => <Icon name={'sign-in'} size={20} color={tintColor} />
+        }
+      },
+      waiting_room: { 
+        screen: Waiting_Room_Screen, 
+        title: "Waiting Room",
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => <Icon name={'clock-o'} size={20} color={tintColor} />
+        }
+      },
+      travel: { 
+        screen: Map_Screen, 
+        title: "Travel",
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => <Icon name={'map'} size={20} color={tintColor} />
+        }
+      },
+      deboard_scan: { 
+        screen: QrScan_Screen_Deboard, 
+        title: "Deboard",
+        navigationOptions: {
+            tabBarIcon: ({ tintColor }) => <Icon name={'sign-out'} size={20} color={tintColor} />
+        }
+      }
+    },
       {
         navigationOptions: ({ navigation }) => ({
           headerRight: (
-            <MaterialIcons.Button
-              name={"settings"}
-              size={25}
-              onPress={() => NavigatorService.navigate("settings_screen")}
-            />
+            <TouchableOpacity onPress={() => NavigatorService.navigate('settings_screen')}>
+            <Icon style={[UtilStyles.icon, {fontSize: 24, marginRight: 10}]} name={'sliders'} />
+            </TouchableOpacity>
           ),
           tabBarOnPress: (scene, jumpToIndex) => {
             return;
           }
         }),
-        //   headerLeft: null,
-        //   headerStyle: {
-        //     backgroundColor: 'white',
-        //     elevation: 2,
-        //     paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight + 10
-        //   },
-        //   headerTitleStyle: {
-        //     fontSize: RkTheme.current.fonts.sizes.h5,
-        //     alignSelf: 'center',
-        //     marginBottom: Platform.OS === 'ios' ? 0 : 10,
-        //     marginTop: Platform.OS === 'ios' ? 25 : 0
-        //   }
-        // },
-        // tabBarOptions: {
-        //   showLabel: false,
-        //   showIcon: true,
-        //   indicatorStyle: { backgroundColor: '#ffffff' },
-        //   activeTintColor: RkTheme.current.colors.accent,
-        //   inactiveTintColor: RkTheme.current.colors.text.hint,
-        //   style: { backgroundColor: '#ffffff' },
-        // },
-        // cardStyle: {
-        //   paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
-        // },
-        // swipeEnabled: false,
-        tabBarPosition: "bottom"
+
+        tabBarPosition: 'bottom',
+      })
+      
+    const LoginNavigator = StackNavigator(
+      {
+        welcome_screen: { screen: Welcome_Screen },
+        register_screen: { screen: Register_Screen },
+        reset_screen: { screen: Reset_Screen },
+        profile_screen: { screen: Profile_Screen },
+        login_screen: { screen: Login_Screen },
+        main_screen: { screen: MainNavigator },
+        qr_scan: { screen: QrScan_Screen },
+        settings_screen: { screen: Settings_Screen },
+        thank_you: { screen: ThankYou_Screen },
+        map_screen: { screen: Map_Screen }
       }
     );
     const LoginNavigator = StackNavigator({

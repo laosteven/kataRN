@@ -1,5 +1,12 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "name": "Kata",
+    "sdkVersion": "25.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icons/app-icon.png"
+  },
+  "loading": {
+    "icon": "./assets/icons/loading-icon.png",
+    "hideExponentText": false
   }
 }

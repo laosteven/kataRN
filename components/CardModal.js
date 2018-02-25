@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, StyleSheet } from 'react-native';
+import { View, Text, Platform, StyleSheet, LayoutAnimation } from 'react-native';
 import Modal from 'react-native-modal';
 
 import {
@@ -7,16 +7,27 @@ import {
   RkButton,
   RkStyleSheet
 } from 'react-native-ui-kitten';
-export default class CardModal extends Component {
+import { updateCard } from '../actions';
+import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { UtilStyles } from '../style/styles';
+
+class CardModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Number: "", Exp_Month: "", Exp_Day: "", CVC: ""
+      Number: '4242424242424242',
+      Exp_Month: '02',
+      Exp_Day: '21',
+      CVC: '999',
     }
   }
+
   render() {
+
     const { Number, Exp_Month, Exp_Day, CVC } = this.state
+
     return (
       <Modal isVisible={this.props.payment_modal}>
         <View style={styles.modalContent}>
@@ -49,26 +60,44 @@ export default class CardModal extends Component {
               />
             </View>
           </View>
-          {/* number: '4242424242424242',
-    exp_month: '02',
-    exp_year: '21',
-    cvc: '999',
-    name: 'Billy Joe' 
-    email*/}
           <View style={{
             flexDirection: 'row',
           }}>
             <RkButton
+              style={{ width: 110, justifyContent: 'flex-start', marginRight: 30 }}
               onPress={() => { this.props._closeModal() }}
-              rkType='medium'
-            >Update</RkButton>
+              rkType='medium danger rounded'>
+              <Icon
+                style={[
+                  UtilStyles.icon,
+                  UtilStyles.iconRound,
+                  {  color: 'white', paddingRight: 10 }
+                ]}
+                name={'times-circle'}
+                size={28} />
+              Close
+            </RkButton>
+
             <RkButton
-              onPress={() => { this.props._closeModal() }}
-              rkType='medium'
-            >Close</RkButton>
+              style={{ width: 110, justifyContent: 'flex-start' }}
+              onPress={() => {
+                this.props.updateCard(this.state);
+                this.props._closeModal()
+              }}
+              rkType='medium success rounded'>
+              <Icon
+                style={[
+                  UtilStyles.icon,
+                  UtilStyles.iconRound,
+                  { color: 'white', paddingRight: 10 }
+                ]}
+                name={'check-circle'}
+                size={28} />
+              Update
+            </RkButton>
           </View>
         </View>
-      </Modal>
+      </Modal >
     );
   }
 }
@@ -107,3 +136,10 @@ let styles = RkStyleSheet.create(theme => ({
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
 }));
+
+const mapStateToProps = ({ settings }) => {
+  const { card } = settings;
+  return { card };
+};
+
+export default connect(mapStateToProps, { updateCard })(CardModal);

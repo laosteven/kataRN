@@ -65,7 +65,12 @@ export default (state = INITIAL_STATE, action) => {
 
       if (typeof action.payload == 'object') {
         const { name, email, phone } = action.payload.user
-        const arr = name.split("  ");
+        let arr
+        if (name !== null) {
+          arr = name.split(" ");
+        } else {
+          arr = ["", ""]
+        }
         return { ...state, loginStatus: action.payload.loggedin, email, phone, firstname: arr[0], lastname: arr[1] }
       }
       else if (action.payload == 'notloggedin') {
@@ -77,9 +82,12 @@ export default (state = INITIAL_STATE, action) => {
     case LOAD_WELCOME_CHANGED:
       return { ...state, loadWelcome: action.payload };
     case LOGIN_USER_SUCCESS:
-      const { name, email, phone } = action.payload.user
-      const arr = name.split("  ");
-      return { ...state, error: '', emailReset: '', user: action.payload, loginStatus: 'loggedin', email, phone, firstname: arr[0], lastname: arr[1], password: '' };
+      if (typeof action.payload == 'object') {
+        const { name, email, phone } = action.payload.user
+        const arr = name.split("  ");
+        return { ...state, error: '', emailReset: '', user: action.payload, loginStatus: 'loggedin', email, phone, firstname: arr[0], lastname: arr[1], password: '' };
+      }
+      return state;
     case LOGIN_USER_FAIL:
       return { ...state, error: action.payload, password: '', loginStatus: 'loginfailed' };
     default:
