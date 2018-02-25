@@ -15,9 +15,8 @@ import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
 import { Header } from "react-navigation";
 import NavigatorService from "./../utils/navigator";
 import { MapView, Circle, Constants, Location, Permissions } from "expo";
-import Toast from 'react-native-easy-toast';
-
-const COUNT = 1;
+import Toast from "react-native-easy-toast";
+import { connect } from "react-redux";
 
 class Map_Screen extends Component {
   static navigationOptions = {
@@ -168,8 +167,9 @@ class Map_Screen extends Component {
   }
 
   componentWillMount() {
-    let lat = 42.324966;
-    let long = -83.007179;
+    const markerIndex = this.props.startNum[2] - 1;
+    let lat = this.state.markers[markerIndex].coordinates.latitude;
+    let long = this.state.markers[markerIndex].coordinates.longitude;
 
     this._setCurrentLocation(lat, long);
 
@@ -186,7 +186,7 @@ class Map_Screen extends Component {
     });
   };
 
-  animate = () => {
+  animate = COUNT => {
     if (COUNT >= this.state.polylines[0].length) {
       setTimeout(() => NavigatorService.navigate("deboard_scan"), 3000);
     } else {
@@ -215,12 +215,13 @@ class Map_Screen extends Component {
 
       COUNT++;
 
-      setTimeout(() => this.animate(), 3000);
+      setTimeout(() => this.animate(COUNT), 3000);
     }
   };
 
   componentDidMount() {
-    this.animate()
+    const COUNT = this.props.startNum[2];
+    setTimeout(() => this.animate(COUNT), 3000);
   }
 
   render() {
@@ -312,4 +313,8 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default Map_Screen;
+const mapStateToProps = ({ qr }) => {
+  return { startNum: qr.onboard.stpNum };
+};
+
+export default connect(mapStateToProps, null)(Map_Screen);
