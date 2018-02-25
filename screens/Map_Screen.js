@@ -6,20 +6,16 @@ import {
   TouchableOpacity,
   Platform,
   Button,
-  Dimensions
+  Dimensions,
+  StyleSheet,
+  Easing
 } from "react-native";
 import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
 import { Header } from "react-navigation";
 import NavigatorService from "./../utils/navigator";
-import {
-  MapView,
-  AnimatedRegion,
-  Circle,
-  Constants,
-  Location,
-  Permissions
-} from "expo";
+import { MapView, Circle, Constants, Location, Permissions } from "expo";
 
+const COUNT = 1;
 
 class Map_Screen extends Component {
   constructor(props) {
@@ -42,71 +38,125 @@ class Map_Screen extends Component {
           coordinates: {
             latitude: 42.324966,
             longitude: -83.007179
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "London",
           coordinates: {
             latitude: 42.981506,
             longitude: -81.247084
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Kitchener-Waterloo",
           coordinates: {
             latitude: 43.455635,
             longitude: -80.493136
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Pearson Airport",
           coordinates: {
             latitude: 43.678123,
             longitude: -79.624995
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Toronto Union",
           coordinates: {
             latitude: 43.645268,
             longitude: -79.380537
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Toronto East Harbour Transit Hub",
           coordinates: {
             latitude: 43.656494,
             longitude: -79.345338
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Kingston",
           coordinates: {
             latitude: 44.257619,
             longitude: -76.536476
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Ottawa",
           coordinates: {
             latitude: 45.416327,
             longitude: -75.651603
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Montreal",
           coordinates: {
             latitude: 45.499983,
             longitude: -73.566643
-          }
+          },
+          pinColor: "#FF0000"
         },
         {
           title: "Quebec",
           coordinates: {
             latitude: 46.817582,
             longitude: -71.214163
-          }
+          },
+          pinColor: "#FF0000"
         }
+      ],
+      polylines: [
+        [
+          {
+            latitude: 42.324966,
+            longitude: -83.007179
+          },
+          {
+            latitude: 42.981506,
+            longitude: -81.247084
+          },
+          {
+            latitude: 43.455635,
+            longitude: -80.493136
+          },
+          {
+            latitude: 43.678123,
+            longitude: -79.624995
+          },
+          {
+            latitude: 43.645268,
+            longitude: -79.380537
+          },
+          {
+            latitude: 43.656494,
+            longitude: -79.345338
+          },
+          {
+            latitude: 44.257619,
+            longitude: -76.536476
+          },
+          {
+            latitude: 45.416327,
+            longitude: -75.651603
+          },
+          {
+            latitude: 45.499983,
+            longitude: -73.566643
+          },
+          {
+            latitude: 46.817582,
+            longitude: -71.214163
+          }
+        ]
       ]
     };
   }
@@ -118,25 +168,40 @@ class Map_Screen extends Component {
     this._setCurrentLocation(lat, long);
 
     // comment this out
-    setTimeout(() => NavigatorService.navigate('deboard_scan'), 5000);
+    // setTimeout(() => NavigatorService.navigate('deboard_scan'), 5000);
   }
 
   _setCurrentLocation = (x, y) => {
     this.setState({
-      currentLocation: {
+      currentLocation: new MapView.AnimatedRegion({
         latitude: x,
         longitude: y
-      }
+      })
     });
   };
 
   animate = () => {
-    this.setState({
-      currentLocation: {
-        latitude: 42.981506,
-        longitude: -81.247084
+    if (COUNT >= this.state.polylines[0].length) {
+      setTimeout(() => NavigatorService.navigate("deboard_scan"), 3000);
+    } else {
+      const { currentLocation } = this.state;
+      const newCoordinate = this.state.polylines[0][COUNT];
+
+      currentLocation.timing(newCoordinate, 50000).start();
+
+      if (COUNT >= 1) {
+        let markersCopy = JSON.parse(JSON.stringify(this.state.markers));
+        //make changes to ingredients
+        markersCopy[COUNT - 1].pinColor = "#00FF00";
+        this.setState({
+          markers: markersCopy
+        });
       }
-    });
+
+      COUNT++;
+
+      setTimeout(() => this.animate(), 3000);
+    }
   };
 
   render() {
@@ -148,11 +213,22 @@ class Map_Screen extends Component {
               key={index}
               coordinate={marker.coordinates}
               title={marker.title}
+              pinColor={marker.pinColor}
             />
           ))}
+
+          {this.state.polylines.map((coordinates, index) => (
+            <MapView.Polyline
+              key={index}
+              coordinates={coordinates}
+              strokeColor={"#0000FF"}
+              strokeWidth={2}
+            />
+          ))}
+
           <MapView.Marker.Animated
             ref={userMarker => {
-              _userMarker = userMarker;
+              this._userMarker = userMarker;
             }}
             coordinate={this.state.currentLocation}
             title="You"
@@ -161,7 +237,7 @@ class Map_Screen extends Component {
         </MapView>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={this.animate}
+            onPress={this.animate.bind(this)}
             style={[styles.bubble, styles.button]}
           >
             <Text>Animate</Text>
@@ -175,11 +251,11 @@ class Map_Screen extends Component {
 let styles = RkStyleSheet.create(theme => ({
   container: {
     backgroundColor: theme.colors.screen.scroll,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: "#ecf0f1",
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end",
+    alignItems: "center"
   },
   paragraph: {
     margin: 24,
@@ -193,7 +269,8 @@ let styles = RkStyleSheet.create(theme => ({
     right: 0,
     top: 0,
     bottom: 0,
-    position: "absolute"
+    position: "absolute",
+    ...StyleSheet.absoluteFillObject
   },
   bubble: {
     flex: 1,
