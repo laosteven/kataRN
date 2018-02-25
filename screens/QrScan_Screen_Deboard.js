@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux'
 import { BarCodeScanner, Permissions } from 'expo';
 import { UtilStyles } from '../style/styles';
-import NavigatorService from './../utils/navigator';  
-import {  } from '../actions'; 
+import { connect } from 'react-redux'
+import { deBoard } from '../actions';
 
-class QrScan_Screen extends Component {
+class QrScan_Screen_Deboard extends Component {
   static navigationOptions = {
-    title: 'Boarding'
+    title: 'UnBoarding'
   };
-
-  constructor(props) { 
-    super(props);  
-    this.scanSuccess = false; 
-  } 
 
   state = {
     hasCameraPermission: null,
@@ -44,10 +38,8 @@ class QrScan_Screen extends Component {
     }
   }
 
-  _handleBarCodeRead = ({ type, data }) => {    
-    if(this.scanSuccess) return; 
-    this.scanSuccess = true; 
-    this.props.onBoard(data)
+  _handleBarCodeRead = ({ type, data }) => {
+    this.props.deBoard(data)
   }
 }
 
@@ -63,5 +55,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(null, {
-  onBoard
-})(QrScan_Screen);
+  deBoard
+})(QrScan_Screen_Deboard);

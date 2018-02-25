@@ -5,12 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Platform, Button } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import NavigatorService from './utils/navigator';
 import { RkTheme } from 'react-native-ui-kitten';
 import { bootstrap } from './style/themeBootstrapper'
 import { AppLoading, Font } from 'expo';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import Welcome_Screen from './screens/Welcome_Screen';
 import Profile_Screen from './screens/Profile_Screen';
@@ -19,7 +20,11 @@ import Register_Screen from './screens/Register_Screen';
 import Reset_Screen from './screens/Reset_Screen';
 import Menu_Screen from './screens/Menu_Screen';
 import QrScan_Screen from './screens/QrScan_Screen';
+import QrScan_Screen_Deboard from './screens/QrScan_Screen_Deboard';
 import Settings_Screen from './screens/Settings_Screen';
+import Waiting_Room_Screen from './screens/Waiting_Room_Screen';
+import ThankYou_Screen from './screens/ThankYou_Screen';
+import Map_Screen from "./screens/Map_Screen";
 
 bootstrap();
 
@@ -62,7 +67,28 @@ export default class App extends React.Component {
     if (!this.state.loaded) {
       return <AppLoading />;
     }
+    
+    const MainNavigator = TabNavigator({
+      menu_scr: { screen: Menu_Screen, title: "Welcome" },
+      board_scan: { screen: QrScan_Screen, title: "Board" },
+      waiting_room: { screen: Waiting_Room_Screen, title: "Waiting Room" },
+      travel: { screen: Map_Screen, title: "Travel" },
+      deboard_scan: { screen: QrScan_Screen_Deboard, title: "Deboard" },
+      // settings_screen: { screen: Settings_Screen },
+    },
+      {
+        navigationOptions: ({ navigation }) => ({
+          headerRight: (
+            <MaterialIcons.Button name={"settings"} size={25}
+              onPress={() => NavigatorService.navigate('settings_screen')}
+            />
+          ),
+          tabBarOnPress: (scene, jumpToIndex) => { return }
 
+        }),
+        tabBarPosition: 'bottom',
+      })
+      
     const LoginNavigator = StackNavigator(
       {
         welcome_screen: { screen: Welcome_Screen },
@@ -72,7 +98,8 @@ export default class App extends React.Component {
         login_screen: { screen: Login_Screen },
         main_screen: { screen: Menu_Screen },
         qr_scan: { screen: QrScan_Screen },
-        settings_screen: { screen: Settings_Screen }
+        settings_screen: { screen: Settings_Screen },
+        thank_you: { screen: ThankYou_Screen }
       }
     );
 

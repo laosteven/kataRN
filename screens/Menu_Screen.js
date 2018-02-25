@@ -24,7 +24,7 @@ import { UtilStyles } from '../style/styles';
 
 class Menu_Screen extends React.Component { 
   static navigationOptions = {
-    title: 'Kata'
+    title: 'KTA'
   };
 
   constructor(props) {
@@ -34,9 +34,11 @@ class Menu_Screen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-         <RkButton rkType='rounded' onPress={() => NavigatorService.navigate('qr_scan')} style={UtilStyles.spaceVertical}>Board</RkButton> 
-         <RkButton rkType='rounded' onPress={() => NavigatorService.navigate('settings_screen')} style={UtilStyles.spaceVertical}>Settings</RkButton> 
-      </View>
+        <RkText>
+          Welcome to KTA when prompted at a Transpod gate press button bellow for QR scan
+        </RkText>
+        <RkButton onPress={() => NavigatorService.navigate('board_scan')} >Board</RkButton>
+      </View >
     );
   }
 }
