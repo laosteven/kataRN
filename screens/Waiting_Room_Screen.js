@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text
+  Text,
+  Dimensions,
+  Image
 } from 'react-native';
+import {
+  RkText,
+  RkStyleSheet,
+  RkButton
+} from 'react-native-ui-kitten';
 import { connect } from 'react-redux';
-import { RkStyleSheet } from 'react-native-ui-kitten';
 import NavigatorService from './../utils/navigator';
+import { scaleModerate } from '../utils/scale';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Waiting_Room_Screen extends Component {
 
@@ -37,13 +45,44 @@ class Waiting_Room_Screen extends Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
   render() {
-    let str = "Your Train will arrive in: " + this.state.time + " Minute"
-    str = this.state.time < 2 ? str.concat("") : str.concat("s")
+
+    let contentHeight = scaleModerate(375, 1);
+    let height = Dimensions.get('window').height - contentHeight;
+    let width = Dimensions.get('window').width;
+    let height_sub = height / 2;
+    let width_sub = width - 40;
+
+    image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+
+    let str = " minute"
+    str = this.state.time < 2 ? str.concat(".") : str.concat("s.")
+
     return (
       <View style={styles.screen}>
-        <Text>Welcome to the {this.props.station} station</Text>
-        <Text>{str}</Text>
+
+        {image}
+
+        <RkText style={styles.paragraph}>
+          Welcome to the 
+          {"\n"}
+          <RkText rkType='bold' style={styles.emphasis}>
+            {this.props.station}
+          </RkText>
+          {"\n"} 
+          station!
+        </RkText>
+
+        <RkText style={styles.paragraph}>
+          Your train will arrive in {"\n"}
+
+          <RkText rkType='bold' style={styles.emphasis}>
+            {this.state.time}
+            {str}
+          </RkText>
+        </RkText>
+
       </View>
     )
   }
@@ -61,6 +100,15 @@ let styles = RkStyleSheet.create(theme => ({
     paddingVertical: 0,
     alignItems: 'center',
     flex: 1,
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    textAlign: "center",
+    color: "#34495e"
+  },
+  emphasis: {
+    fontSize: 26
   },
   button: {
     marginTop: 25,
