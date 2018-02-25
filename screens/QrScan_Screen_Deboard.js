@@ -7,7 +7,7 @@ import { deBoard } from '../actions';
 
 class QrScan_Screen_Deboard extends Component {
   static navigationOptions = {
-    title: 'UnBoarding'
+    title: 'Unboarding'
   };
 
   state = {

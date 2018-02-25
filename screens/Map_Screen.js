@@ -22,6 +22,10 @@ import {
 
 
 class Map_Screen extends Component {
+  static navigationOptions = {
+    title: 'Travel'
+  };
+
   constructor(props) {
     super(props);
 
