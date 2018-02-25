@@ -15,6 +15,7 @@ import { RkText, RkCard, RkStyleSheet, RkTheme } from "react-native-ui-kitten";
 import { Header } from "react-navigation";
 import NavigatorService from "./../utils/navigator";
 import { MapView, Circle, Constants, Location, Permissions } from "expo";
+import Toast from 'react-native-easy-toast';
 
 const COUNT = 1;
 
@@ -204,10 +205,13 @@ class Map_Screen extends Component {
       }
 
       const stationName = this.state.markers[COUNT].title;
-      ToastAndroid.show(
-        "You have arrived at " + stationName,
-        ToastAndroid.SHORT
-      );
+      // ToastAndroid.show(
+      //   "You have arrived at " + stationName,
+      //   ToastAndroid.SHORT
+      // );
+
+      // this._showToast("You have arrived at " + stationName)
+      this.refs.toast.show("You have arrived at " + stationName);
 
       COUNT++;
 
@@ -258,6 +262,7 @@ class Map_Screen extends Component {
             <Text>Travel</Text>
           </TouchableOpacity>
         </View> */}
+        <Toast ref="toast" position="top" />
       </View>
     );
   }
