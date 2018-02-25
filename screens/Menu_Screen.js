@@ -7,7 +7,8 @@ import {
   Platform,
   StatusBar,
   Button,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 } from 'react-native';
 import {
   RkText,
@@ -23,10 +24,12 @@ import { connect } from 'react-redux';
 import CardModal from '../components/CardModal'
 import { Components, Constants } from 'expo';
 import { UtilStyles } from '../style/styles';
+import { scaleModerate } from '../utils/scale';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Menu_Screen extends React.Component {
   static navigationOptions = {
-    title: 'KTA'
+    title: 'Kata'
   };
 
   constructor(props) {
@@ -36,15 +39,34 @@ class Menu_Screen extends React.Component {
   }
 
   render() {
-    console.log(this.props.card)
-    if (this.props.card) {
+    let contentHeight = scaleModerate(375, 1);
+    let height = Dimensions.get('window').height - contentHeight;
+    let width = Dimensions.get('window').width;
+    let height_sub = height / 2;
+    let width_sub = width - 40;
 
+    image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/backgroundLoginV6.png')} />;
+    if (this.props.card) {
       return (
-        <View style={styles.container}>
-          <RkText>
-            Welcome to KTA when prompted at a Transpod gate press button bellow for QR scan
+        <View style={styles.screen}>
+
+          {image}
+
+          <RkText style={styles.paragraph}>
+            Welcome to Kata! {"\n"}{"\n"}
+
+            When prompted at a Transpod gate: {"\n"}
+            press the button below for a QR scan.
         </RkText>
-          <RkButton onPress={() => NavigatorService.navigate('board_scan')} >Board</RkButton>
+
+          <RkButton
+            style={[{ width: 100, justifyContent: 'flex-start', paddingLeft: 15 }, UtilStyles.spaceVertical]}
+            onPress={() => this.props.navigation.navigate('board_scan')}
+            rkType='large rounded info'>
+            <Icon style={[UtilStyles.icon, UtilStyles.iconRound, marginHorizontal: 16]} name={'train'} size={24} />
+          <RkText rkType='caption'>Board</RkText>
+          </RkButton>
+
         </View >
       );
     }
@@ -56,7 +78,6 @@ class Menu_Screen extends React.Component {
       <CardModal payment_modal={this.state.payment_modal} _closeModal={this._closeModal.bind(this)} />
     </View >)
   }
-
   _closeModal() {
     this.setState({ payment_modal: false });
   }
@@ -64,7 +85,6 @@ class Menu_Screen extends React.Component {
 
 let styles = RkStyleSheet.create(theme => ({
   container: {
-    backgroundColor: theme.colors.screen.scroll,
     justifyContent: "center",
     flex: 1,
     alignItems: "center",
