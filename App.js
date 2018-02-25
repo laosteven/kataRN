@@ -1,3 +1,4 @@
+
 import Expo from 'expo';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -14,17 +15,17 @@ import { UtilStyles } from './style/styles';
 import { AppLoading, Font } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Welcome_Screen from './screens/Welcome_Screen';
-import Profile_Screen from './screens/Profile_Screen';
-import Login_Screen from './screens/Login_Screen';
-import Register_Screen from './screens/Register_Screen';
-import Reset_Screen from './screens/Reset_Screen';
-import Menu_Screen from './screens/Menu_Screen';
-import QrScan_Screen from './screens/QrScan_Screen';
-import QrScan_Screen_Deboard from './screens/QrScan_Screen_Deboard';
-import Settings_Screen from './screens/Settings_Screen';
-import Waiting_Room_Screen from './screens/Waiting_Room_Screen';
-import ThankYou_Screen from './screens/ThankYou_Screen';
+import Welcome_Screen from "./screens/Welcome_Screen";
+import Profile_Screen from "./screens/Profile_Screen";
+import Login_Screen from "./screens/Login_Screen";
+import Register_Screen from "./screens/Register_Screen";
+import Reset_Screen from "./screens/Reset_Screen";
+import Menu_Screen from "./screens/Menu_Screen";
+import QrScan_Screen from "./screens/QrScan_Screen";
+import QrScan_Screen_Deboard from "./screens/QrScan_Screen_Deboard";
+import Settings_Screen from "./screens/Settings_Screen";
+import Waiting_Room_Screen from "./screens/Waiting_Room_Screen";
+import ThankYou_Screen from "./screens/ThankYou_Screen";
 import Map_Screen from "./screens/Map_Screen";
 
 bootstrap();
@@ -36,7 +37,7 @@ export default class App extends React.Component {
   }
 
   state = {
-    loaded: false,
+    loaded: false
   };
 
   componentWillMount() {
@@ -53,18 +54,17 @@ export default class App extends React.Component {
 
   _loadAssetsAsync = async () => {
     await Font.loadAsync({
-      'Roboto-Light': require('./fonts/Roboto-Light.ttf'),
-      'Roboto-Medium': require('./fonts/Roboto-Medium.ttf'),
-      Borg: require('./fonts/Borg.ttf'),
-      Curely: require('./fonts/Curely.ttf'),
-      'FontAwesome': require('./fonts/FontAwesome.ttf'),
+      "Roboto-Light": require("./fonts/Roboto-Light.ttf"),
+      "Roboto-Medium": require("./fonts/Roboto-Medium.ttf"),
+      Borg: require("./fonts/Borg.ttf"),
+      Curely: require("./fonts/Curely.ttf"),
+      FontAwesome: require("./fonts/FontAwesome.ttf")
     });
 
     this.setState({ loaded: true });
   };
 
   render() {
-
     if (!this.state.loaded) {
       return <AppLoading />;
     }
@@ -113,9 +113,11 @@ export default class App extends React.Component {
             <Icon style={[UtilStyles.icon, {fontSize: 24, marginRight: 10}]} name={'sliders'} />
             </TouchableOpacity>
           ),
-          tabBarOnPress: (scene, jumpToIndex) => { return }
-
+          tabBarOnPress: (scene, jumpToIndex) => {
+            return;
+          }
         }),
+
         tabBarPosition: 'bottom',
       })
       
@@ -133,6 +135,17 @@ export default class App extends React.Component {
         map_screen: { screen: Map_Screen }
       }
     );
+    const LoginNavigator = StackNavigator({
+      welcome_screen: { screen: Welcome_Screen },
+      register_screen: { screen: Register_Screen },
+      reset_screen: { screen: Reset_Screen },
+      profile_screen: { screen: Profile_Screen },
+      login_screen: { screen: Login_Screen },
+      main_screen: { screen: MainNavigator },
+      qr_scan: { screen: QrScan_Screen },
+      settings_screen: { screen: Settings_Screen },
+      thank_you: { screen: ThankYou_Screen }
+    });
 
     return (
       <Provider store={this.store}>
@@ -148,4 +161,3 @@ export default class App extends React.Component {
     );
   }
 }
-
