@@ -10,23 +10,6 @@ import {
 import NavigatorService from './../utils/navigator';
 
 export const onBoard = (data) => {
-
-  // return async (dispatch) => {
-  //   try {
-  //     await firebase.auth().sendPasswordResetEmail(email);
-  //     dispatch({
-  //       type: ERROR_SET,
-  //       payload: 'Reset Email Sent'
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     let err_message = error.message;
-  //     dispatch({
-  //       type: ERROR_SET,
-  //       payload: err_message
-  //     });
-  //   }
-  // };
   return async (dispatch) => {
     try {
       let arr = data.split(',')

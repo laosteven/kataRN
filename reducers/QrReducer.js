@@ -4,7 +4,6 @@ import {
 } from '../constants/Qr';
 
 export default (state = {}, action) => {
-  console.log(action.payload)
   switch (action.type) {
     case SET_ONBOARD:
       return { ...state, onboard: action.payload };

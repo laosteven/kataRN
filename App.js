@@ -136,7 +136,10 @@ export default class App extends React.Component {
               />
             </TouchableOpacity>
           ),
-          tabBarOnPress: (scene, jumpToIndex) => {
+          tabBarOnPress: ({ scene, previousScene, jumpToIndex }) => {
+            if (previousScene.key === 'travel' && scene.route.key === 'deboard_scan') {
+              jumpToIndex(4)
+            }
             return;
           }
         }),

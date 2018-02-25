@@ -4,7 +4,6 @@ import {
 } from '../constants/Settings';
 
 export default (state = {}, action) => {
-  console.log(action.payload)
   switch (action.type) {
     case SET_CARD:
       return { ...state, card: action.payload };

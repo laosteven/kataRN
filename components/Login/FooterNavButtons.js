@@ -11,22 +11,6 @@ import {
 
 class FooterNavButtons extends Component {
 
-  /*
-  _pressEmailPwdButton() {
-
-    console.log('footerButton');
-    if ( this.props.emailPwdBtnStr=='SignUp' ) {
-      if (!this.state.showEmailPwdState) {
-        // In the case when we have the register screen and the show email-pwd option button is pressed
-        // console.log('We are in the register signup screen and we want to show the email pwd option');
-        this.setState({ showEmailPwdState: true });
-        return;
-      }
-    }
-
-  }
-
-  */
 
   _pressNavButton() {
     // In the other two cases we should navigate
@@ -47,16 +31,16 @@ class FooterNavButtons extends Component {
     android_s_c_justifyContent = 'flex-start';
     let android_styles_footer = {justifyContent: android_s_c_justifyContent};
     */
-    if ( this.props.emailPwdBtnStr=='SignUp'  && !this.props.showEmailPwdState) {
-        // In the case when we are on register screen and the show email-pwd button is not pressed
-        // console.log('show email password option');
-        // {...styles.footer, ...
-        return (
+    if (this.props.emailPwdBtnStr == 'SignUp' && !this.props.showEmailPwdState) {
+      // In the case when we are on register screen and the show email-pwd button is not pressed
+      // console.log('show email password option');
+      // {...styles.footer, ...
+      return (
         <View>
           <View style={styles.textRow}>
-          <RkButton
+            <RkButton
               rkType='clear'
-              onPress={ () => { this.props.pressEmailPwdButton() } }>
+              onPress={() => { this.props.pressEmailPwdButton() }}>
               <RkText rkType='primary3'>
                 {'Show email-password option'}
               </RkText>
@@ -82,18 +66,18 @@ class FooterNavButtons extends Component {
       */
       return (
         <View>
-          <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword = {this.props.onForgotPassword} />
-          <View style={ styles.textRow } >
+          <ForgotPwdButton emailPwdBtnStr={this.props.emailPwdBtnStr} onForgotPassword={this.props.onForgotPassword} />
+          <View style={styles.textRow} >
             <RkButton
-                rkType='clear'
-                onPress={ () => { this._pressNavButton() } }>
-                <RkText rkType='primary3'>
-                  {this.props.onNavString1}
-                </RkText>
-                <RkText rkType='header6'>
-                  {this.props.onNavString2}
-                </RkText>
-              </RkButton>
+              rkType='clear'
+              onPress={() => { this._pressNavButton() }}>
+              <RkText rkType='primary3'>
+                {this.props.onNavString1}
+              </RkText>
+              <RkText rkType='header6'>
+                {this.props.onNavString2}
+              </RkText>
+            </RkButton>
           </View>
         </View>
       );
@@ -124,7 +108,7 @@ class FooterNavButtons extends Component {
 
     return (
       <View>
-        { this._renderFooter() }
+        {this._renderFooter()}
       </View>
     );
 
