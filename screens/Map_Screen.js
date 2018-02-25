@@ -20,7 +20,7 @@ const COUNT = 1;
 
 class Map_Screen extends Component {
   static navigationOptions = {
-    title: 'Travel'
+    title: "Travel"
   };
 
   constructor(props) {
@@ -251,7 +251,7 @@ class Map_Screen extends Component {
             onPress={this.animate.bind(this)}
             style={[styles.bubble, styles.button]}
           >
-            <Text>Animate</Text>
+            <Text>Travel</Text>
           </TouchableOpacity>
         </View>
       </View>
