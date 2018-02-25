@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, StyleSheet } from 'react-native';
+import { View, Text, Platform, StyleSheet, LayoutAnimation } from 'react-native';
 import Modal from 'react-native-modal';
 
 import {
@@ -9,7 +9,8 @@ import {
 } from 'react-native-ui-kitten';
 import { updateCard } from '../actions';
 import { connect } from 'react-redux';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { UtilStyles } from '../style/styles';
 
 class CardModal extends Component {
   constructor(props) {
@@ -22,8 +23,11 @@ class CardModal extends Component {
       CVC: '999',
     }
   }
+
   render() {
+
     const { Number, Exp_Month, Exp_Day, CVC } = this.state
+
     return (
       <Modal isVisible={this.props.payment_modal}>
         <View style={styles.modalContent}>
@@ -60,22 +64,40 @@ class CardModal extends Component {
             flexDirection: 'row',
           }}>
             <RkButton
+              style={{ width: 110, justifyContent: 'flex-start', marginRight: 30 }}
               onPress={() => { this.props._closeModal() }}
-              rkType='medium danger'>
+              rkType='medium danger rounded'>
+              <Icon
+                style={[
+                  UtilStyles.icon,
+                  UtilStyles.iconRound,
+                  {  color: 'white', paddingRight: 10 }
+                ]}
+                name={'times-circle'}
+                size={28} />
               Close
             </RkButton>
-            
+
             <RkButton
+              style={{ width: 110, justifyContent: 'flex-start' }}
               onPress={() => {
                 this.props.updateCard(this.state);
                 this.props._closeModal()
               }}
-              rkType='medium success'>
+              rkType='medium success rounded'>
+              <Icon
+                style={[
+                  UtilStyles.icon,
+                  UtilStyles.iconRound,
+                  { color: 'white', paddingRight: 10 }
+                ]}
+                name={'check-circle'}
+                size={28} />
               Update
             </RkButton>
           </View>
         </View>
-      </Modal>
+      </Modal >
     );
   }
 }

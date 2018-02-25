@@ -83,7 +83,7 @@ class Menu_Screen extends React.Component {
 
         <RkText style={styles.paragraph}>
           <RkText rkType='bold' style={styles.emphasis}>
-            Missing payment method!
+            Payment Method needed!
           </RkText>
 
           {"\n"}{"\n"}

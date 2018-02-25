@@ -29,9 +29,10 @@ class Waiting_Room_Screen extends Component {
     super(props);
     this.state = { time: 10 };
   }
+
   tick() {
     if (this.state.time === 0) {
-      NavigatorService.navigate('travel')
+      this.props.navigation.navigate('travel')
     }
     this.setState(prevState => ({
       time: prevState.time - 1
@@ -55,34 +56,34 @@ class Waiting_Room_Screen extends Component {
     let width_sub = width - 40;
 
     let departure = this.props.station;
-    if(departure === "Windsor") {
+    if (departure === "Windsor") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/windsor.png')} />;
     }
-    else if(departure === "London") {
+    else if (departure === "London") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/london.png')} />;
     }
-    else if(departure === "Kitchener-Waterloo") {
+    else if (departure === "Kitchener-Waterloo") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kitchener-waterloo.png')} />;
     }
-    else if(departure === "Pearson Airport") {
+    else if (departure === "Pearson Airport") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/pearson-airport.png')} />;
     }
-    else if(departure === "Toronto Union") {
+    else if (departure === "Toronto Union") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-union.png')} />;
     }
-    else if(departure === "Toronto East Harbour Transit Hub") {
+    else if (departure === "Toronto East Harbour Transit Hub") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/toronto-east-harbour-transit-hub.png')} />;
     }
-    else if(departure === "Kingston") {
+    else if (departure === "Kingston") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/kingston.png')} />;
     }
-    else if(departure === "Ottawa") {
+    else if (departure === "Ottawa") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/ottawa.png')} />;
     }
-    else if(departure === "Montreal") {
+    else if (departure === "Montreal") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/montreal.png')} />;
     }
-    else if(departure === "Quebec") {
+    else if (departure === "Quebec") {
       image = <Image style={[styles.image, { height, width }]} source={require('../assets/images/quebec.png')} />;
     }
     else {
@@ -123,7 +124,6 @@ class Waiting_Room_Screen extends Component {
 
 const mapStateToProps = ({ qr }) => {
   const { stpName } = qr.onboard;
-
   return { station: stpName };
 };
 

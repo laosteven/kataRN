@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import { StyleSheet, Text, View, StatusBar, Platform, Button } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Platform, Button, TouchableOpacity } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import NavigatorService from './utils/navigator';
 import { RkTheme, RkButton, RkStyleSheet } from 'react-native-ui-kitten';
@@ -109,10 +109,9 @@ export default class App extends React.Component {
       {
         navigationOptions: ({ navigation }) => ({
           headerRight: (
-            <Icon style={[UtilStyles.icon, {fontSize: 24, marginRight: 10}]}  
-            onPress={() => NavigatorService.navigate('settings_screen')} 
-            name={'sliders'} />
-            
+            <TouchableOpacity onPress={() => NavigatorService.navigate('settings_screen')}>
+            <Icon style={[UtilStyles.icon, {fontSize: 24, marginRight: 10}]} name={'sliders'} />
+            </TouchableOpacity>
           ),
           tabBarOnPress: (scene, jumpToIndex) => { return }
 

@@ -38,7 +38,7 @@ class ThankYou_Screen extends Component {
 
   render() {
 
-    let contentHeight = scaleModerate(400, 1);
+    let contentHeight = scaleModerate(450, 1);
     let height = Dimensions.get('window').height - contentHeight;
     let width = Dimensions.get('window').width;
     let height_sub = height / 2;
@@ -111,10 +111,10 @@ class ThankYou_Screen extends Component {
         </RkText>
 
         <RkButton
-          style={[{ width: 240, justifyContent: 'flex-start' }, UtilStyles.spaceVertical]}
+          style={[{ width: 250, justifyContent: 'flex-start' }, UtilStyles.spaceVertical]}
           onPress={() => NavigatorService.reset('main_screen')}
           rkType='large rounded success'>
-          <Icon style={[UtilStyles.icon, UtilStyles.iconRound, { marginHorizontal: 8, color: 'white' }]} name={'heart'} size={24} />
+          <Icon style={[UtilStyles.icon, UtilStyles.iconRound, { marginHorizontal: 8, color: 'white' }]} name={'heart'} size={20} />
           <RkText rkType='bold caption'>Thank you for using Kata</RkText>
         </RkButton>
       </View>
