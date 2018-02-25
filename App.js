@@ -19,7 +19,7 @@ import NavigatorService from "./utils/navigator";
 import { RkTheme, RkButton, RkStyleSheet } from "react-native-ui-kitten";
 import { bootstrap } from "./style/themeBootstrapper";
 import { UtilStyles } from "./style/styles";
-import { AppLoading, Font } from "expo";
+import { AppLoading, Font, Asset } from "expo";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import Welcome_Screen from "./screens/Welcome_Screen";
@@ -49,6 +49,8 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this._loadAssetsAsync();
+    this._cacheResourcesAsync();
+
     firebase.initializeApp({
       apiKey: "AIzaSyCzt6SefehE6JmmQdTaZ0t9B2DfyvwJC9k",
       authDomain: "ktaa-13a11.firebaseapp.com",
@@ -57,6 +59,37 @@ export default class App extends React.Component {
       storageBucket: "ktaa-13a11.appspot.com",
       messagingSenderId: "873334685017"
     });
+  }
+  
+  async _cacheResourcesAsync() {
+    const images = [
+      require("./assets/icons/app-icon.png"),
+      require("./assets/icons/loading-icon.png"),
+      require("./assets/images/backgroundLoginV1.png"),
+      require("./assets/images/backgroundLoginV5.png"),
+      require("./assets/images/backgroundLoginV6.png"),
+      require("./assets/images/cartLogo.png"),
+      require("./assets/images/fastDelivery.png"),
+      require("./assets/images/kingston.png"),
+      require("./assets/images/kitchener-waterloo.png"),
+      require("./assets/images/kittenImage.png"),
+      require("./assets/images/london.png"),
+      require("./assets/images/montreal.png"),
+      require("./assets/images/ottawa.png"),
+      require("./assets/images/pearson-airport.png"),
+      require("./assets/images/quality.png"),
+      require("./assets/images/quebec.png"),
+      require("./assets/images/montreal.png"),
+      require("./assets/images/toronto-east-harbour-transit-hub.png"),
+      require("./assets/images/toronto-union.png"),
+      require("./assets/images/valueForMoney.png"),
+      require("./assets/images/waterloo.png"),
+      require("./assets/images/windsor.png")
+    ];
+
+    await Asset.loadAsync(images);
+
+    this.setState({ loaded: true });
   }
 
   _loadAssetsAsync = async () => {
@@ -67,8 +100,6 @@ export default class App extends React.Component {
       Curely: require("./fonts/Curely.ttf"),
       FontAwesome: require("./fonts/FontAwesome.ttf")
     });
-
-    this.setState({ loaded: true });
   };
 
   render() {
